@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Team Tasks</string>
+    <string name="emailLabel">Email</string>
+    <string name="passwordLabel">Password</string>
+    <string name="logIn">Log in</string>
+    <string name="requiredField">This field is required</string>
+    <string name="wrongEmail">Wrong email</string>
+    <string name="wrongData">Input data is incorrect</string>
+    <string name="loggingIn">Logging in</string>
+    <string name="title_activity_main">Team tasks</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Left menu items -->
+    <string name="home">Home</string>
+    <string name="teams">Teams</string>
+    <string name="activityLog">Activity log</string>
+    <string name="about">About</string>
+    <string name="logOut">Log out</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

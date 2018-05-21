@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/darkGray</item>
+        <item name="colorPrimaryDark">@color/darkGray</item>
+        <item name="colorAccent">@color/mainBlue</item>
+    </style>
+
+    <!-- Main buttons -->
+    <style name="blueButton">
+        <item name="android:background">@color/mainBlue</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
