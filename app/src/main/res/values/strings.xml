@@ -19,5 +19,7 @@
     <string name="about">About</string>
     <string name="logOut">Log out</string>
 
+    <string name="members">Members</string>
+
     <string name="action_settings">Settings</string>
 </resources>

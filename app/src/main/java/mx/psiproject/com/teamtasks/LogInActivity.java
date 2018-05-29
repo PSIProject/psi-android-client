@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,7 +70,7 @@ public class LogInActivity extends AppCompatActivity
                 progressDialog.setProgress(0);
                 progressDialog.show();
 
-                String url = "http://192.168.1.72/psi-web-client/src/php/log-in.php";
+                String url = "http://team-tasks.000webhostapp.com/src/php/log-in.php";
                 final StringRequest logInRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()
                 {
                     @Override
