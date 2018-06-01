@@ -2,10 +2,13 @@ package mx.psiproject.com.teamtasks;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,9 +50,24 @@ public class TeamsFragment extends Fragment
                                                           getString(R.string.members);
                                     }
 
-                                    ListView teamsArea = getActivity().findViewById(R.id.teams_list_view);
-                                    ArrayAdapter adapter = new ArrayAdapter<String> (getActivity(), R.layout.team, teamsString);
+                                    final ListView teamsArea = getActivity().findViewById(R.id.teams_list_view);
+                                    final ArrayAdapter adapter = new ArrayAdapter<String> (getActivity(), R.layout.team, teamsString);
                                     teamsArea.setAdapter(adapter);
+
+                                    teamsArea.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                    {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                        {
+                                            Fragment fragment = new GoalsFragment();
+                                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.content_frame, fragment);
+                                            fragmentTransaction.commit();
+
+                                            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getActivity().getResources().getString(R.string.goals));
+                                        }
+
+                                    });
                                 }
                                 catch (JSONException e) {}
                             }

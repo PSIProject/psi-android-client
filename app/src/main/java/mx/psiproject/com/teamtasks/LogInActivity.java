@@ -39,7 +39,7 @@ public class LogInActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                EditText emailEditText = findViewById(R.id.emailEditText);
+                final EditText emailEditText = findViewById(R.id.emailEditText);
                 final String email = emailEditText.getText().toString();
 
                 if (! email.matches(".+@.+\\..+"))
@@ -54,7 +54,7 @@ public class LogInActivity extends AppCompatActivity
                     return;
                 }
 
-                EditText passwordEditText = findViewById(R.id.passwordEditText);
+                final EditText passwordEditText = findViewById(R.id.passwordEditText);
                 final String password = passwordEditText.getText().toString();
 
                 if (password.isEmpty())
@@ -70,6 +70,7 @@ public class LogInActivity extends AppCompatActivity
                 progressDialog.setProgress(0);
                 progressDialog.show();
 
+
                 String url = "http://team-tasks.000webhostapp.com/src/php/log-in.php";
                 final StringRequest logInRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()
                 {
@@ -82,6 +83,8 @@ public class LogInActivity extends AppCompatActivity
 
                             progressDialog.dismiss();
                             if (response.equals("ok")) {
+                                emailEditText.setText("");
+                                passwordEditText.setText("");
                                 startActivity(new Intent(LogInActivity.this, MainActivity.class));
                             }
                             else

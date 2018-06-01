@@ -111,6 +111,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navTeams:
                 fragment = new TeamsFragment();
             break;
+
+            case  R.id.navLogOut:
+                fragment = new LogOutFragment();
+            break;
+
+            case  R.id.navAbout:
+                fragment = new AboutFragment();
+            break;
         }
 
         if (fragment != null)
