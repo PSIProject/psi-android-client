@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,13 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(final JSONObject response) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try { ((TextView) (findViewById(R.id.nickTextViewx))).setText(response.getString("nick")); }
-                                catch (JSONException e) {}
-                            }
-                        });
+                        try { ((TextView) (findViewById(R.id.nickTextViewx))).setText(response.getString("nick")); }
+                        catch (JSONException e) {}
                     }
                 },
                 new Response.ErrorListener() {
@@ -63,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
         JsonRequestsManager.addToRequestQueue(getUserNickRequest, this);
+
+        Fragment fragment = new HomeFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_content, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -108,12 +110,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId())
         {
+            case R.id.navHome:
+                fragment = new HomeFragment();
+            break;
+
             case R.id.navTeams:
                 fragment = new TeamsFragment();
             break;
 
             case  R.id.navLogOut:
-                fragment = new LogOutFragment();
+                String url = "http://team-tasks.000webhostapp.com/src/php/log-out.php";
+                final StringRequest logOutRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String responseText) {
+                        Toast.makeText(MainActivity.this, getString(R.string.logOutMessage), Toast.LENGTH_SHORT).show();
+                        MainActivity.this.finish();
+                    }
+                }, new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {}
+                });
+                JsonRequestsManager.addToRequestQueue(logOutRequest, MainActivity.this);
             break;
 
             case  R.id.navAbout:
@@ -124,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null)
         {
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame, fragment);
+            fragmentTransaction.replace(R.id.fragment_content, fragment);
             fragmentTransaction.commit();
             item.setChecked(true);
         }
